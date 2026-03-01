@@ -4,19 +4,13 @@ import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
-        List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 4, 6, 10));
+        List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 1, 1, 8));
 
-        boolean containsAce = numbers.remove(Integer.valueOf(1));
-        if (!containsAce) {
-            System.out.println(0);
+        int sum = numbers.stream().mapToInt(x -> x).sum();
+        if (!numbers.contains(1) || sum > 11) {
+            System.out.println(sum);
             return;
         }
-
-        int sum = numbers.stream().mapToInt(a -> a).sum();
-        if (sum > 10) {
-            System.out.println(1);
-            return;
-        }
-        System.out.println(11);
+        System.out.println(sum + 10);
     }
 }
