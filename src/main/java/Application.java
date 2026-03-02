@@ -4,13 +4,9 @@ import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
-        List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 1, 1, 8));
-
-        int sum = numbers.stream().mapToInt(x -> x).sum();
-        if (!numbers.contains(1) || sum > 11) {
-            System.out.println(sum);
-            return;
-        }
-        System.out.println(sum + 10);
+        List<Integer> cardValues = new ArrayList<>(Arrays.asList(1, 1, 1, 8));
+        PlayerHand playerHand = new PlayerHand(cardValues);
+        List<Integer> adjusted = playerHand.getCardValues();
+        System.out.println(adjusted);
     }
 }
