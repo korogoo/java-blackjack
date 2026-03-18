@@ -3,7 +3,7 @@ package blackjack.domain.participants;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import blackjack.domain.game.GameResult;
+import blackjack.domain.game.EarningRate;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -24,9 +24,9 @@ class BetTest {
     void 플레이어가_블랙잭이면_배팅금의_1_5배의_수익를_반환한다() {
         // given
         Bet bet = new Bet(BET_AMOUNT);
-        GameResult gameResult = GameResult.PLAYER_BLACKJACK;
+        EarningRate earningRate = EarningRate.BLACKJACK;
         // when
-        long profit = bet.calculateProfit(gameResult);
+        long profit = bet.calculateProfit(earningRate);
         // then
         assertThat(profit).isEqualTo(
             BET_AMOUNT * BLACKJACK_PAYOUT_NUMERATOR / BLACKJACK_PAYOUT_DENOMINATOR);
@@ -36,9 +36,9 @@ class BetTest {
     void 결과가_무승부라면_0원의_수익을_반환한다() {
         // given
         Bet bet = new Bet(BET_AMOUNT);
-        GameResult gameResult = GameResult.PUSH;
+        EarningRate earningRate = EarningRate.PUSH;
         // when
-        long profit = bet.calculateProfit(gameResult);
+        long profit = bet.calculateProfit(earningRate);
         // then
         assertThat(profit).isEqualTo(0L);
     }
@@ -47,9 +47,9 @@ class BetTest {
     void 딜러가_승리하면_배팅금만큼_손실한_금액을_반환한다() {
         // given
         Bet bet = new Bet(BET_AMOUNT);
-        GameResult gameResult = GameResult.DEALER_WIN;
+        EarningRate earningRate = EarningRate.LOSE;
         // when
-        long profit = bet.calculateProfit(gameResult);
+        long profit = bet.calculateProfit(earningRate);
         // then
         assertThat(profit).isEqualTo(BET_AMOUNT * -1);
     }
@@ -58,9 +58,9 @@ class BetTest {
     void 플레이어가_승리하면_배팅_금액과_동일한_금액의_수익을_반환한다() {
         // given
         Bet bet = new Bet(BET_AMOUNT);
-        GameResult gameResult = GameResult.PLAYER_WIN;
+        EarningRate earningRate = EarningRate.WIN;
         // when
-        long profit = bet.calculateProfit(gameResult);
+        long profit = bet.calculateProfit(earningRate);
         // then
         assertThat(profit).isEqualTo(BET_AMOUNT);
     }

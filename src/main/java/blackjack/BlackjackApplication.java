@@ -48,6 +48,7 @@ public class BlackjackApplication {
             game.hit(player);
             view.printPlayerCards(ParticipantCardsDto.from(player));
         }
+        game.stay(player);
     }
 
     private void playDealerTurn() {

@@ -3,40 +3,43 @@ package blackjack.domain.participants;
 import blackjack.domain.card.Card;
 import blackjack.domain.card.Deck;
 import blackjack.domain.game.Score;
+import blackjack.domain.participants.state.Finished;
+import blackjack.domain.participants.state.State;
 import java.util.List;
 
 abstract class Participant {
-    private final Name name;
-    private final Hand hand;
+    protected final Name name;
+    protected State state;
 
-    public Participant(Name name, Hand hand) {
+    public Participant(Name name, State state) {
         this.name = name;
-        this.hand = hand;
+        this.state = state;
     }
-
-    public abstract boolean canHit();
 
     public final String getName() {
         return name.getValue();
     }
 
     public final List<Card> getCards() {
-        return hand.getCards();
-    }
-
-    public final void hitFrom(Deck deck) {
-        hand.addCard(deck.draw());
+        return state.getCards();
     }
 
     public final Score getScore() {
-        return hand.calculateScore();
+        return state.score();
     }
 
-    public final boolean isBust() {
-        return hand.isBust();
+    public final void hitFrom(Deck deck) {
+        state = state.draw(deck.draw());
     }
 
-    public final boolean isBlackjack() {
-        return hand.isBlackjack();
+    public final void stay() {
+        state = state.stay();
+    }
+
+    public final Finished finishedState() {
+        if (state instanceof Finished finished) {
+            return finished;
+        }
+        throw new IllegalArgumentException();
     }
 }

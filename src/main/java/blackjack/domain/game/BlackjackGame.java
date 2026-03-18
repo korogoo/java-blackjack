@@ -52,15 +52,14 @@ public class BlackjackGame {
     }
 
     public int playDealerTurn() {
-        int hitCount = 0;
-        while (dealer.canHit()) {
-            dealer.hitFrom(deck);
-            hitCount++;
-        }
-        return hitCount;
+        return dealer.playTurn(deck);
     }
 
     public Map<Player, Long> calculatePlayerProfits() {
         return playerGroup.calculatePlayersProfit(dealer);
+    }
+
+    public void stay(Player player) {
+        player.stay();
     }
 }

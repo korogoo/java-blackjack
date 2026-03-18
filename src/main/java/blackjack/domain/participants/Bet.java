@@ -1,17 +1,10 @@
 package blackjack.domain.participants;
 
-import blackjack.domain.game.GameResult;
+import blackjack.domain.game.EarningRate;
 
-public class Bet {
-    private final long amount;
-
-    public static Bet zero() {
-        return new Bet(0L);
-    }
-
-    public Bet(long amount) {
+public record Bet(long amount) {
+    public Bet {
         validatePositive(amount);
-        this.amount = amount;
     }
 
     private static void validatePositive(long amount) {
@@ -20,7 +13,7 @@ public class Bet {
         }
     }
 
-    public long calculateProfit(GameResult gameResult) {
-        return gameResult.calculateProfit(amount);
+    public long calculateProfit(EarningRate earningRate) {
+        return earningRate.calculateProfit(amount);
     }
 }

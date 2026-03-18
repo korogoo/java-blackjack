@@ -1,8 +1,6 @@
 package blackjack.domain.participants;
 
 import blackjack.domain.card.Deck;
-import blackjack.domain.game.BlackjackGameReferee;
-import blackjack.domain.game.GameResult;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +28,6 @@ public final class PlayerGroup {
     }
 
     private long calculateProfit(Dealer dealer, Player player) {
-        GameResult result = BlackjackGameReferee.judge(dealer, player);
-        return player.calculateProfit(result);
+        return player.profitAgainst(dealer);
     }
 }

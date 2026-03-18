@@ -13,7 +13,7 @@ public class ShuffledDeck implements Deck {
     private final Queue<Card> cards;
 
     public ShuffledDeck(List<Card> cards) {
-        Collections.shuffle(cards);
+        Collections.shuffle(new ArrayList<>(cards));
         this.cards = new ArrayDeque<>(cards);
     }
 
