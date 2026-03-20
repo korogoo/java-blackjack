@@ -10,9 +10,19 @@ public class Blackjack extends Finished {
 
     @Override
     protected EarningRate earningRateForPlayer(final Finished dealerState) {
-        if (dealerState instanceof Blackjack) {
+        if (dealerState.isBlackjack()) {
             return EarningRate.PUSH;
         }
         return EarningRate.BLACKJACK;
+    }
+
+    @Override
+    protected boolean isBlackjack() {
+        return true;
+    }
+
+    @Override
+    protected boolean isBust() {
+        return false;
     }
 }

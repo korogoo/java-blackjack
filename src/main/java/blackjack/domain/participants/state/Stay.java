@@ -11,10 +11,10 @@ public class Stay extends Finished {
 
     @Override
     protected EarningRate earningRateForPlayer(final Finished dealerState) {
-        if (dealerState instanceof Blackjack) {
+        if (dealerState.isBlackjack()) {
             return EarningRate.LOSE;
         }
-        if (dealerState instanceof Bust) {
+        if (dealerState.isBust()) {
             return EarningRate.WIN;
         }
         return competeScoreWith(dealerState);
@@ -31,5 +31,15 @@ public class Stay extends Finished {
             return EarningRate.LOSE;
         }
         return EarningRate.PUSH;
+    }
+
+    @Override
+    protected boolean isBlackjack() {
+        return false;
+    }
+
+    @Override
+    protected boolean isBust() {
+        return false;
     }
 }

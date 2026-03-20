@@ -31,4 +31,8 @@ public abstract class Finished extends Started {
     }
 
     protected abstract EarningRate earningRateForPlayer(Finished dealerState);
+
+    protected abstract boolean isBlackjack();
+
+    protected abstract boolean isBust();
 }

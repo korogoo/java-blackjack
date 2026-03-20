@@ -1,6 +1,7 @@
 package blackjack.domain.participants;
 
 import blackjack.domain.card.Deck;
+import blackjack.domain.participants.state.Finished;
 import blackjack.domain.participants.state.State;
 import blackjack.domain.participants.state.StateFactory;
 
@@ -32,5 +33,12 @@ public class Dealer extends Participant {
         }
         stay();
         return hitCount;
+    }
+
+    public final Finished finishedState() {
+        if (!state.isFinished()) {
+            throw new IllegalArgumentException();
+        }
+        return (Finished) state;
     }
 }

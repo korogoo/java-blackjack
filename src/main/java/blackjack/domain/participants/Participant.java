@@ -3,7 +3,6 @@ package blackjack.domain.participants;
 import blackjack.domain.card.Card;
 import blackjack.domain.card.Deck;
 import blackjack.domain.game.Score;
-import blackjack.domain.participants.state.Finished;
 import blackjack.domain.participants.state.State;
 import java.util.List;
 
@@ -34,12 +33,5 @@ abstract class Participant {
 
     public final void stay() {
         state = state.stay();
-    }
-
-    public final Finished finishedState() {
-        if (state instanceof Finished finished) {
-            return finished;
-        }
-        throw new IllegalArgumentException();
     }
 }

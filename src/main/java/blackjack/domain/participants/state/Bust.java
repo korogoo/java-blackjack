@@ -12,4 +12,14 @@ public class Bust extends Finished {
     protected EarningRate earningRateForPlayer(final Finished dealerState) {
         return EarningRate.LOSE;
     }
+
+    @Override
+    protected boolean isBlackjack() {
+        return false;
+    }
+
+    @Override
+    protected boolean isBust() {
+        return true;
+    }
 }
